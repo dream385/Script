@@ -39,7 +39,7 @@ https://pbaccess.video.qq.com/trpc.video_account_login.web_login_trpc.WebLoginTr
 https://raw.githubusercontent.com/WowYiJiu/Personal/main/rewrite/get_tenvideo_cookie.conf, tag=腾讯视频, update-interval=172800, opt-parser=false, enabled=false
 
 [task_local]
-5 7 * * * https://raw.githubusercontent.com/WowYiJiu/Personal/main/Script/tenvideo.js, tag=腾讯视频, img-url=https://github.com/WowYiJiu/Personal/blob/main/icon/Color/tenvideo.png?raw=true, enabled=true
+5 7 * * * https://raw.githubusercontent.com/dream385/Script/main/Tencent.js, tag=腾讯视频
 */
 const $ = new Env("腾讯视频");
 
