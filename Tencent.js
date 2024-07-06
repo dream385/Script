@@ -2,8 +2,7 @@
 *@file       腾讯视频
 *@desp       本脚本仅适用于腾讯视频及体育会员每日签到，仅测试Quantumult X、青龙（只支持单账号）
 *@env        txspCookie、txspRefreshCookie、txspRefreshBody、dayOfGetMonthTicket、isSkipTxspCheckIn、isLottery
-*@updated    2024-6-14
-*@version    v1.0.3
+
 
 🌟 环境变量说明
 txspCookie：腾讯视频app的Cookie
@@ -25,22 +24,34 @@ isLottery: 值域[true, false] 默认为false表示不抽奖，抽抽乐于2024�
 - 浏览器进入腾讯视频网页版，登录后切换成桌面版，刷新网页看到系统消息提示获取txspRefreshCookie、txspRefreshBody成功即可
 - 获取Cookie后, 请将Cookie脚本禁用并移除主机名，以免产生不必要的MITM
 
+-----------------------------------------
+【免责声明】
+1、此脚本仅用于学习研究，不保证其合法性、准确性、有效性，请根据情况自行判断，本人对此不承担任何保证责任。
+2、由于此脚本仅用于学习研究，您必须在下载后 24 小时内将所有内容从您的计算机或手机或任何存储设备中完全删除，若违反规定引起任何事件本人对此均不负责。
+3、请勿将此脚本用于任何商业或非法目的，若违反规定请自行对此负责。
+4、此脚本涉及应用与本人无关，本人对因此引起的任何隐私泄漏或其他后果不承担任何责任。
+5、本人对任何脚本引发的问题概不负责，包括但不限于由脚本错误引起的任何损失和损害。
+6、如果任何单位或个人认为此脚本可能涉嫌侵犯其权利，应及时通知并提供身份证明，所有权证明，我们将在收到认证文件确认后删除此脚本。
+7、所有直接或间接使用、查看此脚本的人均应该仔细阅读此声明。本人保留随时更改或补充此声明的权利。一旦您使用或复制了此脚本，即视为您已接受此免责声明。
 
-⚙ 配置 (Quantumult X)
+
+
+圈x配置 
 [MITM]
 hostname = vip.video.qq.com, pbaccess.video.qq.com
 
-[rewrite_local]
-https://vip.video.qq.com/rpc/trpc.new_task_system.task_system.TaskSystem/ReadTaskList? url script-request-header https://raw.githubusercontent.com/WowYiJiu/Personal/main/Script/tenvideo.js
-https://pbaccess.video.qq.com/trpc.videosearch.hot_rank.HotRankServantHttp/HotRankHttp url script-request-header https://raw.githubusercontent.com/WowYiJiu/Personal/main/Script/tenvideo.js
-https://pbaccess.video.qq.com/trpc.video_account_login.web_login_trpc.WebLoginTrpc/NewRefresh url script-request-body https://raw.githubusercontent.com/WowYiJiu/Personal/main/Script/tenvideo.js
 
-[rewrite_remote]
-https://raw.githubusercontent.com/WowYiJiu/Personal/main/rewrite/get_tenvideo_cookie.conf, tag=腾讯视频, update-interval=172800, opt-parser=false, enabled=false
+[rewrite_local]
+^https:\/\/vip\.video\.qq\.com\/rpc\/trpc\.new_task_system\.task_system\.TaskSystem\/ReadTaskList\? url script-request-header https://raw.githubusercontent.com/dream385/Script/main/Tencent.js
+^https:\/\/pbaccess\.video\.qq\.com\/trpc\.videosearch\.hot_rank\.HotRankServantHttp\/HotRankHttp url script-request-header https://raw.githubusercontent.com/dream385/Script/main/Tencent.js
+^https:\/\/pbaccess\.video\.qq\.com\/trpc\.video_account_login\.web_login_trpc\.WebLoginTrpc\/NewRefresh url script-request-body https://raw.githubusercontent.com/dream385/Script/main/Tencent.js
+
 
 [task_local]
 5 7 * * * https://raw.githubusercontent.com/dream385/Script/main/Tencent.js, tag=腾讯视频
-*/
+**/
+
+
 const $ = new Env("腾讯视频");
 
 let txspCookie = ($.isNode() ? process.env.txspCookie : $.getdata('txspCookie')) || "";
